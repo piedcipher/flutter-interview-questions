@@ -17,3 +17,7 @@ Thanks for helping improve this collection of Flutter interview questions and an
 4. Review the rendered Markdown before submitting.
 
 Please be respectful and constructive in discussions and reviews.
+
+## AI-assisted contributions
+
+The `flutter-interview-questions` skill provides a shared workflow for adding, revising, and reviewing questions. Codex and Gemini CLI can discover it in `.agents/skills/`; Claude Code can discover it through the link in `.claude/skills/`.
