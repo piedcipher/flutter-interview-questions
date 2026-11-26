@@ -81,6 +81,20 @@ Impeller is Flutter's rendering engine, designed for more predictable rendering 
 
 As of Flutter 3.50, Impeller is the default on iOS, Android API 29+ with Vulkan support, and desktop platforms. Android devices that do not meet those requirements fall back to the legacy OpenGL renderer; Flutter web currently uses Skia. See the [Impeller documentation](https://docs.flutter.dev/perf/impeller) for current platform support.
 
+## 10. How does `setState` work in Flutter?
+
+`setState` tells Flutter that a `State` object's data has changed and its UI may need updating. It runs the supplied callback synchronously, then marks the associated element dirty so Flutter calls its `build` method in a scheduled frame. Descendants may also rebuild, and layout or painting may follow if needed.
+
+```dart
+void increment() {
+  setState(() {
+    counter++;
+  });
+}
+```
+
+The callback must not be `async`: complete asynchronous work first, then update state inside `setState`. Do not call it after `dispose`; cancel pending work where possible, or check `mounted` after an asynchronous operation before updating state. Multiple calls for the same `State` in one frame do not produce additional rebuilds.
+
 ## Flutter resources
 
 <img src="https://flutter.dev/assets/icon_flutter.817b4a56b047d0d36b338dd9ffd44dbd.svg" alt="Flutter logo" width="72">
