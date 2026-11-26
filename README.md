@@ -93,6 +93,16 @@ void increment() {
 }
 ```
 
+```mermaid
+flowchart TD
+    A[Call setState] --> B[Run callback synchronously]
+    B --> C[Mark element dirty]
+    C --> D[Schedule a frame if needed]
+    D --> E[Call build in the build phase]
+    E --> F[Update the widget subtree]
+    F --> G[Layout and paint if needed]
+```
+
 The callback must not be `async`: complete asynchronous work first, then update state inside `setState`. Do not call it after `dispose`; cancel pending work where possible, or check `mounted` after an asynchronous operation before updating state. Multiple calls for the same `State` in one frame do not produce additional rebuilds.
 
 ## Flutter resources
