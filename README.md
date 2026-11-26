@@ -36,11 +36,15 @@ The UI thread runs Dart code to build a frame, including widget building, layout
 
 Flutter also builds a **layer tree** as part of compositing a frame.
 
-## 5. What is tree shaking?
+## 5. What is the semantics tree in Flutter?
+
+The semantics tree describes the meaning of the UI for accessibility services. It exposes information such as labels, values, roles, and available actions so screen readers and other assistive technologies can interpret and interact with the app. Flutter derives it from semantics information associated with the UI; use `Semantics` widgets when you need to provide or adjust that information explicitly.
+
+## 6. What is tree shaking?
 
 Tree shaking is a build-time optimization that removes code unreachable from the app's entry points. It helps reduce release-build size; it does not generally remove code just because a runtime branch was not taken.
 
-## 6. What are isolates, and how are they different from `compute`?
+## 7. What are isolates, and how are they different from `compute`?
 
 An isolate is an independent Dart execution context with its own memory and event loop. Isolates do not share mutable objects; they communicate by passing messages. They are useful for CPU-heavy work that would otherwise block the UI isolate.
 
@@ -51,3 +55,26 @@ final result = await compute(parseJson, jsonString);
 ```
 
 Use it for substantial CPU-bound tasks, such as parsing a large JSON document—not for small operations where isolate startup and messaging overhead may outweigh the benefit.
+
+## 8. What does composition over inheritance mean in Flutter?
+
+Composition means building functionality by combining smaller widgets rather than inheriting from a widget to reuse its implementation. It makes UI components easier to customize and reuse. For example, `DropdownMenu` uses a `TextField` internally as its menu anchor instead of extending `TextField`:
+
+```dart
+DropdownMenu<String>(
+  label: const Text('Choose a color'),
+  dropdownMenuEntries: const [
+    DropdownMenuEntry(value: 'red', label: 'Red'),
+    DropdownMenuEntry(value: 'blue', label: 'Blue'),
+  ],
+  onSelected: (color) => print(color),
+)
+```
+
+The `DropdownMenu` combines text input and menu behavior; you do not need to create the internal `TextField` yourself.
+
+## 9. What is Impeller, and how does it compare with Skia?
+
+Impeller is Flutter's rendering engine, designed for more predictable rendering performance. It precompiles a smaller set of shaders at engine build time, reducing runtime shader compilation and associated animation jank compared with Skia. It also uses modern graphics APIs such as Metal and Vulkan and can distribute rendering work across threads. Actual performance depends on the device and workload.
+
+As of Flutter 3.50, Impeller is the default on iOS, Android API 29+ with Vulkan support, and desktop platforms. Android devices that do not meet those requirements fall back to the legacy OpenGL renderer; Flutter web currently uses Skia. See the [Impeller documentation](https://docs.flutter.dev/perf/impeller) for current platform support.
