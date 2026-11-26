@@ -1,6 +1,8 @@
-# Flutter Interview Questions
+# Flutter™ Interview Questions
 
 A collection of Flutter interview questions and answers for learning and interview preparation.
+
+Flutter and the related logo are trademarks of Google LLC. We are not endorsed by or affiliated with Google LLC.
 
 ## 1. What are platform channels?
 
@@ -78,3 +80,9 @@ The `DropdownMenu` combines text input and menu behavior; you do not need to cre
 Impeller is Flutter's rendering engine, designed for more predictable rendering performance. It precompiles a smaller set of shaders at engine build time, reducing runtime shader compilation and associated animation jank compared with Skia. It also uses modern graphics APIs such as Metal and Vulkan and can distribute rendering work across threads. Actual performance depends on the device and workload.
 
 As of Flutter 3.50, Impeller is the default on iOS, Android API 29+ with Vulkan support, and desktop platforms. Android devices that do not meet those requirements fall back to the legacy OpenGL renderer; Flutter web currently uses Skia. See the [Impeller documentation](https://docs.flutter.dev/perf/impeller) for current platform support.
+
+## Flutter resources
+
+<img src="https://flutter.dev/assets/icon_flutter.817b4a56b047d0d36b338dd9ffd44dbd.svg" alt="Flutter logo" width="72">
+
+[Flutter documentation](https://docs.flutter.dev/)
